@@ -21,10 +21,12 @@ module.exports = (app: Express) => {
             req.params.mid, req.params.aid));
     const removeActorFromMovie = (req: Request, res: Response) =>
         castingsDao.removeActorFromMovie(
-            req.params.aid, req.params.mid);
+            req.params.aid, req.params.mid)
+            .then(status => res.send(status));
     const removeMovieFromActor = (req: Request, res: Response) =>
         castingsDao.removeMovieFromActor(
-            req.params.mid, req.params.aid);
+            req.params.mid, req.params.aid)
+            .then(status => res.send(status));
 
     app.get('/api/movies/:mid/actors', findActorsInMovie);
     app.get('/api/actors/:aid/movies', findMoviesForActor);

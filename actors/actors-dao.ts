@@ -45,4 +45,3 @@ export default class ActorsDao implements ActorsDaoInterface {
         return result.upsertedCount;
     }
 }
-
