@@ -1,6 +1,9 @@
 /**
  * @file Implements an Express Node HTTP server.
  */
+
+import UserDao from "./users/UserDao";
+import UserController from "./users/UserController";
 import ActorController from "./actors/actors-controller";
 import ActorsService from "./actors/actors-service";
 import ActorsDao from "./actors/actors-dao";
@@ -12,7 +15,22 @@ const cors = require('cors')
 const app = express();
 app.use(cors());
 app.use(express.json());
-mongoose.connect('mongodb://localhost:27017/fsd');
+
+
+const options = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    autoIndex: false,
+    maxPoolSize: 10,
+    serverSelectionTimeoutMS: 5000,
+    socketTimeoutMS: 45000,
+    family: 4
+}
+
+mongoose.connect('mongodb://localhost:27017/fsd', options);
+
+const userDao = new UserDao();
+const userController = new UserController(app, userDao);
 
 const dbCallback = (movies: any) => {
     console.log('invoked when db returns data')
