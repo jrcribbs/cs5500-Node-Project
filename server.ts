@@ -2,6 +2,14 @@
  * @file Implements an Express Node HTTP server.
  */
 
+import LikesController
+    from "./likes/LikesController";
+
+
+import TuitDao from "./tuits/TuitDao";
+import TuitController
+    from "./tuits/TuitController";
+
 import UserDao from "./users/UserDao";
 import UserController from "./users/UserController";
 import ActorController from "./actors/actors-controller";
@@ -27,7 +35,7 @@ const options = {
     family: 4
 }
 
-mongoose.connect('mongodb://localhost:27017/fsd', options);
+mongoose.connect('mongodb://alice:alice123@localhost:27017/fsd', options);
 
 const userDao = new UserDao();
 const userController = new UserController(app, userDao);
@@ -61,9 +69,13 @@ app.get('/', sayHello);
 
 app.get('/hello', sayHello2);
 
+const tuitDao = TuitDao.getInstance();
+const tuitController = TuitController
+    .getInstance(app, tuitDao);
 /**
  * Start a server listening at port 4000 locally
  * but use environment variable PORT on Heroku if available.
  */
-const PORT = 4000;
+LikesController(app);
+const PORT = 4001;
 app.listen(process.env.PORT || PORT);
