@@ -17,4 +17,3 @@ export default class User {
   private joined: Date = new Date();
   private location: Location | null = null;
 }
-

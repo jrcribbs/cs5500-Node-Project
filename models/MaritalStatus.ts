@@ -4,4 +4,3 @@ enum MaritalStatus {
   Widowed = 'WIDOWED'
 };
 export default MaritalStatus;
-

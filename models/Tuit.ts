@@ -5,4 +5,3 @@ export default class Tuit {
   private postedOn: Date = new Date();
   private postedBy: User | null = null;
 }
-

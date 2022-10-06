@@ -4,4 +4,3 @@ enum AccountType {
   Professional = 'PROFESSIONAL'
 };
 export default AccountType;
-
