@@ -1,10 +1,29 @@
 import Tuit from "../models/Tuit";
+import TuitModel from "../mongoose/TuitModel";
+import TuitDaoI from "../interfaces/TuitDao";
+import {Query} from "mongoose";
 
-export default interface TuitDao {
-  findAllTuits(): Promise<Tuit[]>;
-  findTuitsByUser(uid: string): Promise<Tuit[]>;
-  findTuitById(tid: string): Promise<Tuit>;
-  createTuit(tuit: Tuit): Promise<Tuit>;
-  updateTuit(tid: string, tuit: Tuit): Promise<any>;
-  deleteTuit(tid: string): Promise<any>;
+export default class TuitDao implements TuitDaoI {
+
+  async findAllTuits(): Promise<Tuit[]> {
+    return TuitModel.find();
+  }
+
+  async findTuitsByUser(uid: string): Promise<Tuit[]>{
+    return TuitModel.find({_id: uid});
+  }
+
+  async findTuitById(tid: string): Promise<Query<any, any, {}, any>>{
+    return TuitModel.findById(tid);
+  }
+
+  async createTuit(tuit: Tuit): Promise<Tuit>{
+    return await TuitModel.create(tuit);
+  }
+  async updateTuit(tid: string, tuit: Tuit): Promise<any> {
+    return TuitModel.updateOne({_id: tid}, {$set: tuit});
+  }
+  async deleteTuit(tid: string): Promise<any>{
+    return TuitModel.deleteOne({_id: tid});
+  }
 }
