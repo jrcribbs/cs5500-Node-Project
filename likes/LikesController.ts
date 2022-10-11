@@ -15,7 +15,7 @@ const findUsersThatLikedTuit =
 const findTuitLikesCount =
     (req: Request, res: Response) =>
         dao.findTuitLikesCount(req.params.tid)
-            .then(count => res.json({count}));
+            .then(likes => res.json({likes}));
 
 const userLikesTuit = (req: Request, res: Response) =>
     dao.userLikesTuit(req.params.uid, req.params.tid)

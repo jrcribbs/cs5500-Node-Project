@@ -33,7 +33,7 @@ export default class TuitController {
                 .then(tuits => res.json(tuits));
     private createTuit = (req: Request, res: Response) =>
         TuitController.tuitDao
-            .createTuit(req.body)
+            .createTuit({...req.body, postedBy: req.params.uid})
             .then(actualTuit => res.json(actualTuit));
 
     private deleteTuit = (req: Request, res: Response) =>

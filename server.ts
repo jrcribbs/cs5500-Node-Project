@@ -35,7 +35,7 @@ const options = {
     family: 4
 }
 
-mongoose.connect('mongodb://alice:alice123@localhost:27017/fsd', options);
+mongoose.connect('mongodb://localhost:27017/fsd', options);
 
 const userDao = new UserDao();
 const userController = new UserController(app, userDao);
@@ -77,5 +77,5 @@ const tuitController = TuitController
  * but use environment variable PORT on Heroku if available.
  */
 LikesController(app);
-const PORT = 4001;
+const PORT = 4000;
 app.listen(process.env.PORT || PORT);

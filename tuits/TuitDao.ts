@@ -1,6 +1,7 @@
 import TuitDaoI from "./TuitDaoI";
 import Tuit from "./Tuit";
 import tuitModel from "./TuitModel";
+import User from "../users/User";
 
 export default class TuitDao implements TuitDaoI {
     private static tuitDao: TuitDao | null = null;
@@ -13,12 +14,20 @@ export default class TuitDao implements TuitDaoI {
     private constructor() {}
     public async findTuitById(id: string):
         Promise<Tuit> {
-        const tuitMongooseModel = await tuitModel
-            .findById(id).populate('postedBy').exec();
+        const tuitMongooseModel: any = await tuitModel
+            .findById(id)
+            .populate('postedBy').exec();
+        console.log(tuitMongooseModel.postedBy)
+        const author = new User(
+            tuitMongooseModel.postedBy?._id??'',
+            tuitMongooseModel.postedBy?.username??'',
+            tuitMongooseModel.postedBy?.password??''
+        );
         const tuit = new Tuit(
             tuitMongooseModel?._id.toString() ?? '',
             tuitMongooseModel?.tuit ?? '',
             new Date(tuitMongooseModel?.postedOn ?? (new Date())))
+        tuit.author = author;
         return tuit;
     }
     public async findAllTuits(): Promise<Tuit[]> {
