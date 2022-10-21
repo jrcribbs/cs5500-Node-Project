@@ -64,5 +64,5 @@ const tuitController = TuitController.getInstance(app, tuitDao);
  * but use environment variable PORT on Heroku if available.
  */
 LikesController(app);
-const PORT = 4001;
+const PORT = 4000;
 app.listen(process.env.PORT || PORT);

@@ -66,6 +66,7 @@ export default class TuitDao implements TuitDaoI {
     public async deleteTuit(tuitId: string): Promise<any> {
         return await tuitModel.deleteOne({_id: tuitId});
     }
+
     public async updateTuit(tuitId: string, tuit: Tuit): Promise<any> {
         return tuitModel.updateOne(
             {_id: tuitId},
