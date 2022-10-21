@@ -12,13 +12,8 @@ import TuitController
 
 import UserDao from "./users/UserDao";
 import UserController from "./users/UserController";
-import ActorController from "./actors/actors-controller";
-import ActorsService from "./actors/actors-service";
-import ActorsDao from "./actors/actors-dao";
 import express, {Request, Response} from 'express';
 import * as mongoose from "mongoose";
-import * as moviesDao from "./movies/movies-dao";
-import MoviesController from "./movies/movies-controller";
 const cors = require('cors')
 const app = express();
 app.use(cors());
@@ -35,7 +30,7 @@ const options = {
     family: 4
 }
 
-mongoose.connect('mongodb://localhost:27017/fsd', options);
+mongoose.connect('mongodb://localhost:27017/tuitter', options);
 
 const userDao = new UserDao();
 const userController = new UserController(app, userDao);
@@ -56,26 +51,18 @@ function sayHello (req: Request, res: Response) {
 const sayHello2 = (req: Request, res: Response) =>
     res.send('Hi from FSD 2!!!');
 
-const movieController = new MoviesController(app);
-
-
-const actorDao = new ActorsDao();
-const actorService = new ActorsService(actorDao);
-const actorController = new ActorController(app, actorService);
-
-require('./castings/castings-controller')(app);
 
 app.get('/', sayHello);
 
 app.get('/hello', sayHello2);
 
 const tuitDao = TuitDao.getInstance();
-const tuitController = TuitController
-    .getInstance(app, tuitDao);
+const tuitController = TuitController.getInstance(app, tuitDao);
+
 /**
  * Start a server listening at port 4000 locally
  * but use environment variable PORT on Heroku if available.
  */
 LikesController(app);
-const PORT = 4000;
+const PORT = 4001;
 app.listen(process.env.PORT || PORT);

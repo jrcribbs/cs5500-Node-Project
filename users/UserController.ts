@@ -9,7 +9,7 @@ export default class UserController implements UserControllerI {
         this.app = app;
         this.userDao = userDao;
         this.app.get('/users', this.findAllUsers);
-        this.app.get('/users/:userid', this.findUserById);
+        this.app.get('/users/:userid', this.findUserById)
         this.app.post('/users', this.createUser);
         this.app.delete('/users/:userid', this.deleteUser);
         this.app.put('/users/:userid', this.updateUser);
