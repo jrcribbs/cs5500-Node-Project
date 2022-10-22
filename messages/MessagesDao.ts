@@ -1,18 +1,14 @@
 import messagesModel from "./MessagesModel";
 
 export const userMessagesUser =
-    (uid: string, uid2: string) => messagesModel
-    .create({userFollowed: uid, userFollowing: uid2});
+    (message: string, uid: string, uid2: string) => messagesModel
+    .create({message: message, from: uid, to: uid2});
 
 export const userDeletesMessage =
     (uid: string, uid2: string) => messagesModel
-    .deleteOne({to: uid,
-      from: uid2});
+    .deleteOne({from: uid,
+      to: uid2});
 
-/**
- * finds users that provided uid is following.
- * @param uid uid of following user
- */
 export const findSentMessages =
     (uid: string) => messagesModel
     .find({from: uid})

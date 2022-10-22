@@ -3,7 +3,7 @@ import {Express, Request, Response}
 import * as dao from "./MessagesDao";
 
 const userMessagesUser = (req: Request, res: Response) =>
-    dao.userMessagesUser(req.params.uid, req.params.uid2)
+    dao.userMessagesUser(req.params.message, req.params.uid, req.params.uid2)
     .then(status => res.json(status));
 
 const userDeletesMessage = (req: Request, res: Response) =>
