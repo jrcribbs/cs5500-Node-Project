@@ -4,7 +4,7 @@ export default class Tuit {
     private id: string;
     private tuit: string;
     private postedOn: Date;
-    private postedBy: User | null;
+    public postedBy: User | null;
 
     constructor(id: string, tuit: string, postedOn: Date) {
         this.id = id;

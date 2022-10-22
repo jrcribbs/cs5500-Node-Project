@@ -3,6 +3,7 @@ import Tuit from "./Tuit";
 import tuitModel from "./TuitModel";
 import User from "../users/User";
 
+
 export default class TuitDao implements TuitDaoI {
     private static tuitDao: TuitDao | null = null;
     public static getInstance = (): TuitDao => {
@@ -12,6 +13,7 @@ export default class TuitDao implements TuitDaoI {
         return TuitDao.tuitDao;
     }
     private constructor() {}
+
     public async findTuitById(id: string):
         Promise<Tuit> {
         const tuitMongooseModel: any = await tuitModel
@@ -30,6 +32,7 @@ export default class TuitDao implements TuitDaoI {
         tuit.author = author;
         return tuit;
     }
+
     public async findAllTuits(): Promise<Tuit[]> {
         const tuitMongooseModels =
             await tuitModel.find();
@@ -42,6 +45,7 @@ export default class TuitDao implements TuitDaoI {
             });
         return tuitModels;
     }
+
     public async findTuitsByAuthor(authorId: string):
         Promise<Tuit[]> {
         const tuitMongooseModels = await tuitModel
@@ -63,6 +67,7 @@ export default class TuitDao implements TuitDaoI {
             new Date(tuitMongooseModel?.postedOn ?? (new Date()))
         )
     }
+
     public async deleteTuit(tuitId: string): Promise<any> {
         return await tuitModel.deleteOne({_id: tuitId});
     }
