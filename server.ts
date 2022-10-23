@@ -19,6 +19,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+/**
+ * Options for server.
+ */
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -29,10 +32,11 @@ const options = {
     family: 4
 }
 
-mongoose.connect('mongodb://localhost:27017/tuitter', options);
+/**
+ * Connecting to atlas database
+ */
+mongoose.connect('mongodb+srv://seoh:superdupersecretzaxscd@cluster0.ebtz510.mongodb.net/?retryWrites=true&w=majority', options);
 
-const userDao = new UserDao();
-const userController = new UserController(app, userDao);
 
 const dbCallback = (movies: any) => {
     console.log('invoked when db returns data')
@@ -52,9 +56,13 @@ app.get('/', sayHello);
 
 app.get('/hello', sayHello2);
 
+/**
+ * Getting singleton instances and passing app to controllers.
+ */
+const userDao = new UserDao();
+const userController = new UserController(app, userDao);
 const tuitDao = TuitDao.getInstance();
 const tuitController = TuitController.getInstance(app, tuitDao);
-
 LikesController(app);
 BookmarksController(app);
 FollowsController(app);
