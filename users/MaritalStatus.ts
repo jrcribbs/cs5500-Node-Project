@@ -1,3 +1,6 @@
+/**
+ * Marital status enum for accounts.
+ */
 enum MaritalStatus {
     Married = 'MARRIED',
     Single = 'SINGLE',
