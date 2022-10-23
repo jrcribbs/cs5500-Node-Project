@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 
+/**
+ * Messages mongoose schema.
+ */
 const messagesSchema = new mongoose.Schema({
   message: {type: "string"},
   to: {type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'},

@@ -1,16 +1,26 @@
 import followsModel from "./FollowsModel";
 
+/**
+ * Creates new follows relationshio
+ * @param uid followed user
+ * @param uid2 following user
+ */
 export const userFollowsUser =
     (uid: string, uid2: string) => followsModel
     .create({userFollowed: uid, userFollowing: uid2});
 
+/**
+ * Deletes following relationship
+ * @param uid followed user
+ * @param uid2 following user
+ */
 export const userUnfollowsUser =
     (uid: string, uid2: string) => followsModel
     .deleteOne({userFollowed: uid,
         userFollowing: uid2});
 
 /**
- * finds users that provided uid is following.
+ * Finds users that provided uid is following.
  * @param uid uid of following user
  */
 export const findFollowingUsers =
@@ -20,7 +30,7 @@ export const findFollowingUsers =
     .populate('userFollowing', 'user').exec();
 
 /**
- * finds users that are following provided uid.
+ * Finds users that are following provided uid.
  * @param uid uid of following user
  */
 export const findFollowedUsers =

@@ -3,9 +3,14 @@ import Tuit from "./Tuit";
 import tuitModel from "./TuitModel";
 import User from "../users/User";
 
-
+/**
+ * DAO for Tuits.
+ */
 export default class TuitDao implements TuitDaoI {
     private static tuitDao: TuitDao | null = null;
+    /**
+     * Singleton pattern for DAO instantiation.
+     */
     public static getInstance = (): TuitDao => {
         if (TuitDao.tuitDao === null) {
             TuitDao.tuitDao = new TuitDao();
@@ -14,6 +19,10 @@ export default class TuitDao implements TuitDaoI {
     }
     private constructor() {}
 
+    /**
+     * Finds specific tuit.
+     * @param id tid of tuit
+     */
     public async findTuitById(id: string):
         Promise<Tuit> {
         const tuitMongooseModel: any = await tuitModel
@@ -33,6 +42,9 @@ export default class TuitDao implements TuitDaoI {
         return tuit;
     }
 
+    /**
+     * Finds all tuits.
+     */
     public async findAllTuits(): Promise<Tuit[]> {
         const tuitMongooseModels =
             await tuitModel.find();
@@ -46,6 +58,10 @@ export default class TuitDao implements TuitDaoI {
         return tuitModels;
     }
 
+    /**
+     * Finds tuits by specific author.
+     * @param authorId uid of user
+     */
     public async findTuitsByAuthor(authorId: string):
         Promise<Tuit[]> {
         const tuitMongooseModels = await tuitModel
@@ -59,6 +75,11 @@ export default class TuitDao implements TuitDaoI {
             });
         return tuitModels;
     }
+
+    /**
+     * Creates new tuit.
+     * @param tuit json body of tuit to be made
+     */
     public async createTuit(tuit: Tuit): Promise<Tuit> {
         const tuitMongooseModel = await tuitModel.create(tuit);
         return new Tuit(
@@ -68,10 +89,19 @@ export default class TuitDao implements TuitDaoI {
         )
     }
 
+    /**
+     * Deletes specific tuit.
+     * @param tuitId tid of tuit to be deleted
+     */
     public async deleteTuit(tuitId: string): Promise<any> {
         return await tuitModel.deleteOne({_id: tuitId});
     }
 
+    /**
+     * Updates specific tuit
+     * @param tuitId tid of tuit to be updated
+     * @param tuit json with updated tuit information
+     */
     public async updateTuit(tuitId: string, tuit: Tuit): Promise<any> {
         return tuitModel.updateOne(
             {_id: tuitId},

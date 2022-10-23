@@ -1,5 +1,8 @@
 import User from "../users/User";
 
+/**
+ * Tuit objects for Tuiter.
+ */
 export default class Tuit {
     private id: string;
     private tuit: string;
