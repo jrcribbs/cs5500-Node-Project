@@ -7,16 +7,17 @@ import TuitDao from "./tuits/TuitDao";
 import TuitController from "./tuits/TuitController";
 import UserDao from "./users/UserDao";
 import UserController from "./users/UserController";
-import express, {Request, Response} from 'express';
+import * as express from 'express';
+import {Request, Response} from 'express';
 import * as mongoose from "mongoose";
 import BookmarksController from "./bookmarks/BookmarksController";
 import FollowsController from "./follows/FollowsController";
 import MessagesController from "./messages/MessagesController";
 
-const cors = require('cors')
+//const cors = require('cors')
 const app = express();
 
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 
 /**
