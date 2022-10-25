@@ -14,10 +14,8 @@ import BookmarksController from "./bookmarks/BookmarksController";
 import FollowsController from "./follows/FollowsController";
 import MessagesController from "./messages/MessagesController";
 
-//const cors = require('cors')
 const app = express();
 
-// app.use(cors());
 app.use(express.json());
 
 /**
