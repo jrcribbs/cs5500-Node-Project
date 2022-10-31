@@ -19,6 +19,7 @@ const LikeController_1 = require("./controllers/LikeController");
 const mongoose = require("mongoose");
 var cors = require('cors');
 // build the connection string
+/**
 const PROTOCOL = "mongodb+srv";
 const DB_USERNAME = process.env.DB_USERNAME;
 const DB_PASSWORD = process.env.DB_PASSWORD;
@@ -27,6 +28,17 @@ const DB_QUERY = "retryWrites=true&w=majority";
 const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/?${DB_QUERY}`;
 // connect to the database
 mongoose.connect(connectionString);
+ **/
+const options = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    autoIndex: false,
+    maxPoolSize: 10,
+    serverSelectionTimeoutMS: 5000,
+    socketTimeoutMS: 45000,
+    family: 4
+};
+mongoose.connect('mongodb+srv://seoh:superdupersecretzaxscd@cluster0.ebtz510.mongodb.net/?retryWrites=true&w=majority', options);
 const app = express();
 app.use(express.json());
 app.use(cors());

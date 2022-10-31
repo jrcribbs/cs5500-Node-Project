@@ -16,7 +16,6 @@ import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
 import LikeController from "./controllers/LikeController";
 import * as mongoose from "mongoose";
-var cors = require('cors')
 
 // build the connection string
 /**
@@ -42,7 +41,6 @@ mongoose.connect('mongodb+srv://seoh:superdupersecretzaxscd@cluster0.ebtz510.mon
 
 const app = express();
 app.use(express.json());
-app.use(cors());
 
 app.get('/', (req: Request, res: Response) =>
     res.send('Welcome!'));
