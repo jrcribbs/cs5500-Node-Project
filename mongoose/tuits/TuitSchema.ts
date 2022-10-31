@@ -1,4 +1,5 @@
-import mongoose, {Schema} from "mongoose";
+import * as mongoose from "mongoose";
+import {Schema} from "mongoose";
 import Tuit from "../../models/tuits/Tuit";
 const TuitSchema = new mongoose.Schema<Tuit>({
     tuit: {type: String, required: true},

@@ -1,4 +1,5 @@
-import mongoose, {Schema} from "mongoose";
+import * as mongoose from "mongoose";
+import {Schema} from "mongoose";
 import Like from "../../models/likes/Like";
 
 const LikeSchema = new mongoose.Schema<Like>({
