@@ -1,10 +1,10 @@
-import {UserList} from "../components/profile/userList";
+import {UserList} from "../components/profile/user-list";
 import {screen, render} from "@testing-library/react";
 import {HashRouter} from "react-router-dom";
 import {findAllUsers} from "../services/users-service";
 import axios from "axios";
 
-jest.mock('axios');
+// jest.mock('axios');
 
 const MOCKED_USERS = [
   {username: 'ellen_ripley', password: 'lv426', email: 'repley@weyland.com', _id: "123"},
@@ -20,6 +20,7 @@ test('user list renders static user array', () => {
   expect(linkElement).toBeInTheDocument();
 });
 
+
 test('user list renders async', async () => {
   const users = await findAllUsers();
   render(
@@ -29,6 +30,8 @@ test('user list renders async', async () => {
   const linkElement = screen.getByText(/NASA/i);
   expect(linkElement).toBeInTheDocument();
 })
+
+jest.mock('axios');
 
 test('user list renders mocked', async () => {
   axios.get.mockImplementation(() =>
