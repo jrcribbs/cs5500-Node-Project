@@ -17,7 +17,6 @@ const UserController_1 = require("./controllers/UserController");
 const TuitController_1 = require("./controllers/TuitController");
 const LikeController_1 = require("./controllers/LikeController");
 const mongoose = require("mongoose");
-var cors = require('cors');
 // build the connection string
 /**
 const PROTOCOL = "mongodb+srv";
@@ -41,7 +40,6 @@ const options = {
 mongoose.connect('mongodb+srv://seoh:superdupersecretzaxscd@cluster0.ebtz510.mongodb.net/?retryWrites=true&w=majority', options);
 const app = express();
 app.use(express.json());
-app.use(cors());
 app.get('/', (req, res) => res.send('Welcome!'));
 app.get('/add/:a/:b', (req, res) => res.send(req.params.a + req.params.b));
 // create RESTful Web service API
