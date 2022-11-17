@@ -26,6 +26,23 @@ const AuthenticationController = (app: Express) => {
       res.json(insertedUser);
     }
   }
+  const profile = (req, res) => {
+    const profile = req.session['profile'];
+    if (profile) {
+      profile.password = "";
+      res.json(profile);
+    } else {
+      res.sendStatus(403);
+    }
+  }
+
+  const logout = (req, res) => {
+    req.session.destroy();
+    res.sendStatus(200);
+  }
+
+  app.post("/api/auth/profile", profile);
+  app.post("/api/auth/logout", logout);
   app.post("/api/auth/signup", signup);
 }
 
