@@ -6,13 +6,13 @@ import Tuit from "../tuits/Tuit";
 import User from "../users/User";
 
 /**
- * @typedef Like Represents likes relationship between a user and a tuit,
+ * @typedef Dislike Represents likes relationship between a user and a tuit,
  * as in a user dislikes a tuit
  * @property {Tuit} tuit Tuit being disliked
- * @property {User} likedBy User disliking the tuit
+ * @property {User} dislikedBy User disliking the tuit
  */
 
-export default interface Like {
+export default interface Dislike {
   tuit: Tuit,
   dislikedBy: User
 };
