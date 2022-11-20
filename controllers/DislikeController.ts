@@ -39,7 +39,7 @@ export default class DislikeController implements DislikeControllerI {
       app.get("/api/users/:uid/dislikes", DislikeController.dislikeController.findAllTuitsDislikedByUser);
       app.get("/api/tuits/:tid/dislikes", DislikeController.dislikeController.findAllUsersThatDislikedTuit);
       app.post("/api/users/:uid/dislikes/:tid", DislikeController.dislikeController.userDislikesTuit);
-      app.delete("/api/users/:uid/undislikes/:tid", DislikeController.dislikeController.userUndislikesTuit);
+      app.delete("/api/users/:uid/dislikes/:tid", DislikeController.dislikeController.userUndislikesTuit);
     }
     return DislikeController.dislikeController;
   }
@@ -118,19 +118,19 @@ export default class DislikeController implements DislikeControllerI {
     const userId = uid === "me" && profile ?
         profile._id : uid;
     try {
-      const userAlreadyLikedTuit = await DislikeController.dislikeDao
+      const userAlreadyDislikedTuit = await DislikeController.dislikeDao
       .findUserDislikesTuit(userId, tid);
-      const howManyLikedTuit = await DislikeController.dislikeDao
+      const howManyDislikedTuit = await DislikeController.dislikeDao
       .countHowManyDislikedTuit(tid);
       let tuit = await DislikeController.tuitDao.findTuitById(tid);
-      if (userAlreadyLikedTuit) {
+      if (userAlreadyDislikedTuit) {
         await DislikeController.dislikeDao.userUndislikesTuit(userId, tid);
-        tuit.stats.likes = howManyLikedTuit - 1;
+        tuit.stats.dislikes = howManyDislikedTuit - 1;
       } else {
         await DislikeController.dislikeDao.userDislikesTuit(userId, tid);
-        tuit.stats.likes = howManyLikedTuit + 1;
+        tuit.stats.dislikes = howManyDislikedTuit + 1;
       }
-      await DislikeController.tuitDao.updateLikes(tid, tuit.stats);
+      await DislikeController.tuitDao.updateDislikes(tid, tuit.stats);
       res.sendStatus(200);
     } catch (e) {
       res.sendStatus(404);
