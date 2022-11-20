@@ -1,5 +1,5 @@
 import UserDao from "../daos/UserDao";
-import mongoose from "mongoose";
+import * as mongoose from "mongoose";
 
 const userDao: UserDao = UserDao.getInstance();
 
