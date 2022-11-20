@@ -22,7 +22,13 @@ export default class DislikeDao implements DislikeDaoI {
   findAllTuitsDislikedByUser = async (uid: string): Promise<Dislike[]> =>
       DislikeModel
       .find({likedBy: uid})
-      .populate("tuit")
+      .populate({
+        path: "tuit",
+        populate: {
+          path: "postedBy"
+        }
+      })
+
       .exec();
   userDislikesTuit = async (uid: string, tid: string): Promise<any> =>
       DislikeModel.create({tuit: tid, likedBy: uid});
